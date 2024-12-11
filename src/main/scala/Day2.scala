@@ -20,8 +20,7 @@ object Day2 {
   }
 
   private def isSafe(report: List[Int]): Boolean = {
-    @tailrec
-    def loop(lastLevel: Int, lastDiff: Int, tail: List[Int], acc: Boolean): Boolean = {
+    @tailrec def loop(lastLevel: Int, lastDiff: Int, tail: List[Int], acc: Boolean): Boolean = {
       if (tail.isEmpty) acc
       else
         val currentLevel = tail.head
