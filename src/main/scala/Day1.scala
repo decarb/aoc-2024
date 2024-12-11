@@ -11,7 +11,7 @@ object Day1 {
           .unzip
       }
 
-    val (left, right) = maybeLists.getOrElse(throw new Exception("Failed to read input"))
+    val (left, right) = maybeLists.fold(throw _, identity)
 
     val distances = left.sorted.zip(right.sorted).map((a, b) => math.abs(a - b)).sum
     println(s"Day 1 part 1 - $distances")
