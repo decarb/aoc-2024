@@ -18,14 +18,9 @@ object Day3:
 
   private def processMults(s: String): Int =
     multRegex
-      .findAllIn(s)
+      .findAllMatchIn(s)
       .toList
-      .map { mult =>
-        multRegex.findFirstMatchIn(mult).map { matched =>
-          val List(a, b) = matched.subgroups.map(_.toInt)
-          a * b
-        }.get
-      }
+      .map { mult => val List(a, b) = mult.subgroups.map(_.toInt); a * b }
       .sum
 
   private def processCommandString(commandString: String): Int =
