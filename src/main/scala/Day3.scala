@@ -9,23 +9,24 @@ object Day3:
 
   def main(args: Array[String]): Unit =
     val line = Util.getLines(Source.fromResource("day3.txt")).mkString
-    val mults = getMults(line)
 
-    val totalMults = foldMults(mults)
+    val totalMults = processMults(line)
     println(s"Day 3 part 1 - $totalMults")
 
     val totalStrictMults = processCommandString(line)
     println(s"Day 3 part 2 - $totalStrictMults")
 
-  private def getMults(s: String): List[String] = multRegex.findAllIn(s).toList
-
-  private def foldMults(mults: List[String]): Int =
-    mults.map { mult =>
-      multRegex.findFirstMatchIn(mult).map { matched =>
-        val List(a, b) = matched.subgroups.map(_.toInt)
-        a * b
-      }.get
-    }.sum
+  private def processMults(s: String): Int =
+    multRegex
+      .findAllIn(s)
+      .toList
+      .map { mult =>
+        multRegex.findFirstMatchIn(mult).map { matched =>
+          val List(a, b) = matched.subgroups.map(_.toInt)
+          a * b
+        }.get
+      }
+      .sum
 
   private def processCommandString(commandString: String): Int =
     @tailrec def loop(s: String, acc: Int, process: Boolean): Int =
